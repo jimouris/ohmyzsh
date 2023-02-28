@@ -1,5 +1,12 @@
 <p align="center"><img src="https://ohmyzsh.s3.amazonaws.com/omz-ansi-github.png" alt="Oh My Zsh"></p>
 
+
+```sh
+git clone --recurse-submodules git@github.com:jimouris/ohmyzsh.git ~/.oh-my-zsh
+chsh -s $(which zsh)
+ln -s ~/.oh-my-zsh/custom/zshrc ~/.zshrc
+```
+
 Oh My Zsh is an open source, community-driven framework for managing your [zsh](https://www.zsh.org/) configuration.
 
 Sounds boring. Let's try again.
@@ -40,6 +47,7 @@ To learn more, visit [ohmyz.sh](https://ohmyz.sh), follow [@ohmyzsh](https://twi
     - [Manual Installation](#manual-installation)
   - [Installation Problems](#installation-problems)
   - [Custom Plugins and Themes](#custom-plugins-and-themes)
+  - [Remove directories aliases](#remove-directories-aliases)
 - [Getting Updates](#getting-updates)
   - [Manual Updates](#manual-updates)
 - [Uninstalling Oh My Zsh](#uninstalling-oh-my-zsh)
