@@ -51,6 +51,7 @@ plugins=(
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
+    command-not-found
     sudo
     # copydir
 )
