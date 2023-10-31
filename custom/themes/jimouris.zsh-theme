@@ -1,6 +1,6 @@
 #!/bin/sh
+
 PROMPT='$(prompt_context)%{$fg[blue]%}%c%{$reset_color%} $(git_prompt_info)%{$fg_bold[yellow]$(prompt_indicators)%}%{$reset_color%}'
-# PROMPT+='$fg_bold[yellow]$(virtualenv_info)%{$reset_color%}'
 
 BRANCH_ICON="\ue0a0"
 ROOT_ICON="\u26A1"
@@ -31,14 +31,8 @@ function parse_git_status() {
 }
 
 function prompt_indicators() {
-    if [[ "$UID" -eq 0 ]]; then
-        echo "$ROOT_ICON "
-    fi
     if [[ $(jobs -l | wc -l) -gt 0 ]]; then
-        echo "$GEAR_ICON  "
-    fi
-    if [ $VIRTUAL_ENV ]; then
-        echo '('`basename $VIRTUAL_ENV`') '
+        echo "$GEAR_ICON "
     fi
 }
 
@@ -51,7 +45,8 @@ function prompt_context() {
     fi
 }
 
-# export SROMPT='${ret_status}%{$fg[cyan]%}%c%{$reset_color%} %{$fg_bold[yellow]$(prompt_indicators)%}%{$reset_color%}'
-# SROMPT+='$fg_bold[yellow]$(virtualenv_info)%{$reset_color%}'
+function virtualenv_info {
+    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
+}
 
-export RPROMPT=$'%F{cyan}%*%f'
+export RPROMPT=$'%F{cyan}[%*]%f'
