@@ -1,12 +1,24 @@
 # This is where you put your hand rolled scripts (remember to chmod them)
-PATH="$HOME/bin:$PATH"
 
-if [ "$(uname)" == "Darwin" ]; then
-    export JAVA_HOME=$(/usr/libexec/java_home)
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+export GPG_TTY=$(tty)
+
+PATH="$HOME/bin:$PATH"
+if [ "$(uname)" = "Darwin" ]; then
+    export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+    export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
+    export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+    export PATH="/opt/homebrew/opt/bzip2/bin:$PATH"
+
+    export JAVA_HOME="/opt/homebrew/opt/openjdk@11"
+elif [ "$(uname -s | cut -c 1-5)" = "Linux" ]; then
     export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 fi
-export PATH="$PATH/$JAVA_HOME/bin"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+export PATH="$JAVA_HOME/bin:$PATH"
 export PAGER="most"
 
 source "$HOME/.cargo/env"
@@ -14,7 +26,6 @@ source "$HOME/.cargo/env"
 GOROOT=/usr/local/go
 GOPATH=~/.go
 PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export PATH=/opt/homebrew/opt/python@3.11/libexec/bin:$PATH
 
 GPG_TTY=$(tty)
 export GPG_TTY
@@ -33,4 +44,3 @@ function run-nada-tests() {
 PATH=$PATH:$HOME/.nilup/bin
 
 eval "$(fzf --zsh)"
-
