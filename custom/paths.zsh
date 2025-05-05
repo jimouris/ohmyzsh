@@ -5,7 +5,6 @@ export GPG_TTY=$(tty)
 PATH="$HOME/bin:$PATH"
 if [ "$(uname)" = "Darwin" ]; then
     export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
-    export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
     export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
     export PATH="/opt/homebrew/opt/bzip2/bin:$PATH"
 
@@ -22,10 +21,6 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export PAGER="most"
 
 source "$HOME/.cargo/env"
-
-GOROOT=/usr/local/go
-GOPATH=~/.go
-PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 GPG_TTY=$(tty)
 export GPG_TTY
@@ -44,3 +39,9 @@ function run-nada-tests() {
 PATH=$PATH:$HOME/.nilup/bin
 
 eval "$(fzf --zsh)"
+
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
+
+export PATH=$PATH:$(go env GOPATH)/bin
